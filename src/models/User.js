@@ -8,9 +8,15 @@ module.exports = (sequelize)=>{
         image:{
             type:DataTypes.STRING,
         },
-        email:{
+        id:{
             type:DataTypes.STRING,
             primaryKey:true,
+            unique: true,
+            allowNull: false,
+
+        },
+        email:{
+            type:DataTypes.STRING,
             allowNull: false,
             unique: true
         },
@@ -24,7 +30,7 @@ module.exports = (sequelize)=>{
         },
         secret:{
             type:DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         }
     },
     {timestamps:false}

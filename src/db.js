@@ -1,6 +1,6 @@
 require("dotenv").config(); //**La variables de entorno quedan dispobnibles .env */
 //**Crea la conexion con la base de datos (con sequelize) */
-const {Sequelize} = require("sequelize");
+const {Sequelize, DataTypes} = require("sequelize");
 const { DATABASE_CONN } = process.env;
 const sequelize = new Sequelize(DATABASE_CONN ,{ logging: false,timezone: '-03:00' });
 
@@ -32,7 +32,7 @@ PurchaseModel(sequelize);
 
 
 //**Relacionar los Modelos */
-const { Platform,Product,Genre,Store,Image} = sequelize.models;
+const { Platform,Product,Genre,Store,Image, User} = sequelize.models;
 
 const ProductsPlatforms_Profile = sequelize.define('ProductsPlatforms', {}, { timestamps: false });
 Product.belongsToMany(Platform,{through:ProductsPlatforms_Profile});
@@ -48,5 +48,25 @@ Store.belongsToMany(Product,{through:ProductsStores_Profile});
 
 Product.hasMany(Image);
 Image.belongsTo(Product);
+
+
+const FriendUser = sequelize.define('FriendUser', {
+  accept:{
+      type:DataTypes.STRING,
+      allowNull: true,
+  } 
+}, 
+{ timestamps: false });
+User.belongsToMany(User, { through: FriendUser, as: 'FriendInList' });
+
+
+const WishlistProduct = sequelize.define('WishlistProduct', {}, { timestamps: false });
+User.belongsToMany(Product, { through: WishlistProduct, as: 'Wishlist' });
+Product.belongsToMany(User, { through: WishlistProduct, as:'Wishlist' });
+
+
+const ShoppingCart = sequelize.define('ShoppingCart', {}, { timestamps: false });
+User.belongsToMany(Product, { through: ShoppingCart,  as: 'ShoppingCartAction' });
+Product.belongsToMany(User, { through: ShoppingCart,  as: 'ShoppingCartAction' });
 
 module.exports={sequelize, ...sequelize.models};

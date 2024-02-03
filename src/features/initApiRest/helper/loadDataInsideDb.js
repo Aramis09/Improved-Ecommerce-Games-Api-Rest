@@ -116,8 +116,6 @@ async function getDataRestProducts () {
       });
       return dataRequerida;
   } catch (error) {
-    console.log("<<---------err2----------");
-
       (error.message);
   }
 }

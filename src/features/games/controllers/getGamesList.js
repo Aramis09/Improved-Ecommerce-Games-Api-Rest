@@ -7,7 +7,6 @@ const { buildObjetOrder,buildObjetWhere } = require("../helpers/helperCrudGames"
 
 module.exports = async (req, res) => {
   const { pageNumber = 1, quantityResult = 9, orderAlphabetical = "nothing", orderRating = "nothing", filterPrice = "nothing",filterGenre = "nothing"} = req.query;
-  console.log({ pageNumber , quantityResult , orderAlphabetical , orderRating , filterPrice ,filterGenre });
   
   const where = buildObjetWhere({ filterPrice , filterGenre })
   const order = buildObjetOrder({ orderAlphabetical,orderRating })

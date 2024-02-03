@@ -27,7 +27,6 @@ const completeApiModified = async () => {
         clearArray = pagesModified.filter(game => {
             if(game.price) return game;
         });
-        console.log(clearArray.length);
         return clearArray;
     }
     return clearArray;
