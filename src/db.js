@@ -51,7 +51,7 @@ Image.belongsTo(Product);
 
 
 const FriendUser = sequelize.define('FriendUser', {
-  accept:{
+  status:{
       type:DataTypes.STRING,
       allowNull: true,
   } 

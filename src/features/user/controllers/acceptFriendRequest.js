@@ -1,15 +1,23 @@
 const { FriendUser } = require("../../../db")
 
-const acceptFriendRequst = async (req, res) => {
-  const { idEmitterAction,idForDelete } = req.body;
-  const request = await FriendUser.findAll({
-    UserId:idEmitterAction,
-    idReceiverRequest:idForDelete
+module.exports=  async (req, res) => {
+  const { idEmitterRequest,idReceiverRequest } = req.body;
+  const request1 = await FriendUser.findAll({
+    where: {
+      UserId:idEmitterRequest,
+      FriendInListId:idReceiverRequest
+}
   })
-  await request[0].update({accept:"accept"})
+  const request2 = await FriendUser.findAll({
+    where: {
+      UserId:idReceiverRequest,
+      FriendInListId:idEmitterRequest
+}
+  })
+  await request1[0].update({status:"accept"})
+  await request2[0].update({status:"accept"})
+
   return res.status(200).json({
-    data:request
+    data:request1[0]
   })
 }
-
-module.exports = acceptFriendRequst

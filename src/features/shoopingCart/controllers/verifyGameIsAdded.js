@@ -1,4 +1,4 @@
-const { WishlistProduct } = require("../../../db")
+const { ShoppingCart } = require("../../../db")
 module.exports = async (req, res) => {
   const { idGame,idUser } = req.query;
   if(!idUser) {
@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
       data:"tirar error"
     })
   }
-  const gameFound = await WishlistProduct.findAll({
+  const gameFound = await ShoppingCart.findAll({
     where:{
       UserId:idUser,
       ProductId:idGame
@@ -22,4 +22,3 @@ module.exports = async (req, res) => {
     data:true
   })
 }
-

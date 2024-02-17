@@ -3,6 +3,9 @@ module.exports = {
   addFriend: require("./sendRequestFriend"),
   deleteFriend: require("../controllers/deleteFriend"),
   acceptFriend: require("../controllers/acceptFriendRequest"),
+  getRequestPending: require("./getRequestPending"),
+  getFriendsAccepted: require("./getFriendsAccepted"),
+
 
 
 

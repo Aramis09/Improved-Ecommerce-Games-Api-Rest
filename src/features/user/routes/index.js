@@ -1,7 +1,10 @@
 const { Router } = require("express")
-const { createUser,addFriend,deleteFriend,acceptFriend } = require("../controllers/index")
+const { getFriendsAccepted,getRequestPending,createUser,addFriend,deleteFriend,acceptFriend } = require("../controllers/index")
 
 const routerUser = Router();
+
+routerUser.get("/requestPending",getRequestPending)
+routerUser.get("/friendList",getFriendsAccepted)
 
 routerUser.post("/create",createUser)
 routerUser.post("/addFriend",addFriend)
